@@ -62,12 +62,27 @@ if not st.session_state.user_id:
 
   with tab1:
     st.header("Вход")
-    pass
-
+    username = st.text_input("Име на потребителя:")
+    password = st.text_input("Парола:", type="password")
+    if st.button("Вход"):
+      user = login_user(username, password)  
+      if user:
+        st.success(f"Welcome, {user[1]}!")
+        st.session_state.user_id = user[0]
+        st.session_state.username = user[1]
+        st.rerun()
+      else:
+        st.error("Invalid username or password")
+  
+   
 
   with tab2:
     st.header("Регистрация")
-    pass
-
+    username = st.text_input("Име на потребителя:", key="reg_username")
+    password = st.text_input("Парола:", type="password", key="reg_password")
+    email = st.text_input("Електронна поща:")
+    if st.button("Регистрация"):
+      register_user(username, password, email)
+      st.success("Регистрацията е успешна!")
 else:
-  st.header("Menu")
+  st.header("Dashboard")
