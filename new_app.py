@@ -48,7 +48,10 @@ def login_user(username, password):
     return user
   return False
 
-
+if "user_id" not in st.session_state:
+    st.session_state.user_id = None
+if "username" not in st.session_state:
+    st.session_state.username = None
 
 # UI частта
 st.title("🗂️ Lazov Tools")
