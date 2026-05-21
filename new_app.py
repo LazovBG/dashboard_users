@@ -58,4 +58,4 @@ if st.button("Вход"):
   if user:
     st.success(f"Welcome, {user[1]}!")
   else:
-    st.error("Invalid username or password"
+    st.error("Invalid username or password")
