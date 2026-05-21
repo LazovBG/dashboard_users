@@ -53,6 +53,11 @@ def login_user(username, password):
 # UI частта
 st.title("🗂️ Lazov Tools")
 
+if st.button("Регистрация"):
+  username = st.text_input("Име на потребителя:")
+  password = st.text_input("Парола:", type="password")
+
+
 if st.button("Вход"):
   user = login_user(username, password)
   if user:
