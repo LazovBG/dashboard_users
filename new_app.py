@@ -65,3 +65,6 @@ if not st.session_state.user_id:
   with tab2:
     st.header("Регистрация")
     pass
+
+else:
+  st.header("Menu")
