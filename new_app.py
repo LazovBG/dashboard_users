@@ -54,6 +54,7 @@ if "username" not in st.session_state:
     st.session_state.username = None
 
 # UI частта
+init_db()
 st.title("🗂️ Lazov Tools")
 
 if not st.session_state.user_id:
