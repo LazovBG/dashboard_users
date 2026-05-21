@@ -53,14 +53,15 @@ def login_user(username, password):
 # UI частта
 st.title("🗂️ Lazov Tools")
 
-if st.button("Регистрация"):
-  username = st.text_input("Име на потребителя:")
-  password = st.text_input("Парола:", type="password")
+if not st.session_state.user_id:
+  #st.header("Вход или регистрация")
+  tab1, tab2 = st.tabs(["Вход", "Регистрация"])
+
+  with tab1:
+    st.header("Вход")
+    pass
 
 
-if st.button("Вход"):
-  user = login_user(username, password)
-  if user:
-    st.success(f"Welcome, {user[1]}!")
-  else:
-    st.error("Invalid username or password")
+  with tab2:
+    st.header("Регистрация")
+    pass
