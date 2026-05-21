@@ -6,6 +6,6 @@ import sqlite3
 
 
 # ===== STREAMLIT UI =====
-init_db()
+#init_db()
 
 st.title("🗂️ Lazov Tools")
