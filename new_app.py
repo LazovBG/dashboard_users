@@ -86,10 +86,10 @@ if not st.session_state.user_id:
       register_user(username, password, email)
       st.success("Регистрацията е успешна!")
 else:
-  st.header(f"Добре дошъл, {st.session_state.username}")
-  #print(st.session_state)
+  
   
   col1, col2 = st.columns([4, 1])
+  col1.header(f"Добре дошъл, {st.session_state.username} 👋")
   col1.button("Изход") # бутонът за изход вдясно
   if col2.button("Изход"):
     st.session_state.user_id = None
