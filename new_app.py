@@ -90,4 +90,4 @@ else:
   print(st.session_state)
   
   col1, col2 = st.columns([4, 1])
-  col1.header("Изход") # бутонът за изход вдясно
+  col1.button("Изход") # бутонът за изход вдясно
