@@ -91,3 +91,7 @@ else:
   
   col1, col2 = st.columns([4, 1])
   col1.button("Изход") # бутонът за изход вдясно
+  if col2.button("Изход"):
+    st.session_state.user_id = None
+    st.session_state.username = None
+    st.rerun()
