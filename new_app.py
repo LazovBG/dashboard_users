@@ -88,7 +88,7 @@ if not st.session_state.user_id:
     else:
       col1, col2 = st.columns([4, 1])
       col1.header(f"Добре дошъл, {st.session_state.username} 👋")
-        if col2.button("Изход"):
+      if col2.button("Изход"):
         st.session_state.user_id = None
         st.session_state.username = None
         st.rerun()
