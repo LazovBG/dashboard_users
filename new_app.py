@@ -59,26 +59,16 @@ if "username" not in st.session_state:
 def get_tasks(user_id):
   conn = sqlite3.connect("lazov_tools.db")
   cursor = conn.cursor()
-  cursor.execute("SELECT * FROM tasks WHERE id = ?", (user_id,))
+  cursor.execute("SELECT * FROM tasks WHERE user_id = ?", (user_id,))
   rows = cursor.fetchall()
   conn.close()
   return rows
-
-#добавяне на потребителя
-#def register_user(username, password, email
-def register_user(username, password, email):
-  conn = sqlite3.connect("lazov_tools.db")
-  cursor = conn.cursor()
-  hashed_passwoed = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
-  cursor.execute("INSERT INTO users (username, pasword, email) VALUES (?, ?, ?)", (username, hashed_passwoed, email))
-  conn.commit()
-  conn.close()
 
 #тярбва да добавя добавяне на задача
 #def add_task(title, user_id): ...
 def add_task(title, user_id):
   conn = sqlite3.connect("lazov_tools.db")
-  cuesor = conn.cursor()
+  cursor = conn.cursor()
   cursor.execute("INSERT INTO tasks (title, user_id) VALUES (?, ?)", (title, user_id))
   conn.commit()
   conn.close()
@@ -94,7 +84,14 @@ def complete_task(task_id):
 
 #Да се добави изтриване назадача на потребител
 #def delete_task(task_id): ...
+def delete_task(task_id):
+  conn = sqlite3.connect("lazov_tools.db")
+  cursor = conn.cursor()
+  cursor.execute("DELETE FROM tasks WHERE id = ?", (task_id))
+  conn.commit()
+  conn.close()
 
+# UI частта
 
 # UI частта
 init_db()
@@ -136,7 +133,23 @@ else:
     st.session_state.username = None
     st.rerun()
 
-
-
-
+  # добавяне на задача
+  new_task = st.text_input("Нова задача:")
+  if st.button("Добави"):
+    add_task(new_task, st.session_state.user_id)
+    st.rerun()
+  
+  # показване на задачите
+  tasks = get_tasks(st.session_state.user_id)
+  for task in tasks:
+    col1, col2, col3 = st.columns([4, 1, 1])
+    status = "✅" if task[3] == 1 else "❌"
+    col1.write(f"{task[0]}. {task[2]} {status}")
+    if col2.button("✔️", key=f"complete_{task[0]}"):
+      complete_task(task[0])
+      st.rerun()
+    if col3.button("🗑️", key=f"delete_{task[0]}"):
+      delete_task(task[0])
+      st.rerun()
+  
 
